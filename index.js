@@ -7,6 +7,25 @@ var requestAnimationFrame =
 		setTimeout(c, 1000 / 60);
 	};
 
+function shuffle(array) {
+	var currentIndex = array.length, temporaryValue, randomIndex;
+	
+	// While there remain elements to shuffle...
+	while (0 !== currentIndex) {
+		// Pick a remaining element...
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+
+		// And swap it with the current element.
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}
+	
+	return array;
+}
+
+
 function clamp(x, a, b) {
 	return x < a ? a : x > b ? b : x;
 }
@@ -30,6 +49,7 @@ function receivedInfo(response) {
 	    nicknameList.removeChild(nicknameList.firstChild);
 	}
 	
+	shuffle(chatters.viewers);
 	for(var i = 0; i < chatters.viewers.length; i++) {
 		var nick = document.createElement("li");
 		nick.classList.add("rouletteNick");
@@ -128,6 +148,7 @@ function loop() {
 function roll() {
 	rollDuration = musiqueArgent.duration;
 	musiqueArgent.currentTime = 0;
+	musiqueArgent.volume = 0.05;
 	musiqueArgent.play();
 	
 	startTime = nowSec();
@@ -165,7 +186,7 @@ nicknameList.addEventListener("wheel", function(e) {
 	e.preventDefault();
 	e.returnValue = false;
 	
-	nickRollAngle += e.deltaY * 0.1;
+	nickRollAngle += (e.deltaY > 0 ? 1 : -1) * 0.1;
 	updateTransforms();
 	return false;
 });
