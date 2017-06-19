@@ -107,6 +107,11 @@ h1 {
 	box-shadow: 0px 0px 24px black inset;
 }
 
+/* Explication */
+.explicationDiv {
+	margin: 0px 64px;
+}
+
 /* Control panel */
 .controlPanel {
 	display: block;
@@ -224,7 +229,7 @@ h1 {
 
 /* Footer */
 #titleSep, #footerSep {
-	margin: 48px 0px;
+	margin: 32px 0px;
 	
 	display: inline-block;
 	
