@@ -161,8 +161,13 @@ getViewersButton.addEventListener("click", function(e) {
 });
 
 nicknameList.addEventListener("wheel", function(e) {
+	e = e || window.event;
+	e.preventDefault();
+	e.returnValue = false;
+	
 	nickRollAngle += e.deltaY * 0.1;
 	updateTransforms();
+	return false;
 });
 
 updateTransforms();
